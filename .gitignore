@@ -1,0 +1,4 @@
+/workdir
+*.log
+*.log.*
+/.nextflow
