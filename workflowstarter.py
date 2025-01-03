@@ -27,7 +27,8 @@ def run_nextflow_workflow(workflow_path, cleanup, nocleanup):
         return f"Error: {e.stderr}"
 
 args = parse()
-workflow_path = "/mnt/c/Users/proec/Desktop/Spachelor/Bachelor_Arbeit/workflow.nf"
+os.curdir
+workflow_path = "workflow.nf"
 output = run_nextflow_workflow(workflow_path, args.cleanup, args.nocleanup)
 
 if os.path.exists(".nextflow.log"):
