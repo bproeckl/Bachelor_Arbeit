@@ -10,6 +10,7 @@ process PYSCRIPT {
 
     script:
     """
+    echo "Using path: \$WORKFLOW_PATH"
     python3 ${baseDir}/bin/script.py $STR
     """
 }

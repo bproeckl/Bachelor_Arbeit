@@ -1,6 +1,9 @@
 import subprocess
 import argparse
 import os
+import cv2
+
+PATH = os.environ['WORKFLOW_PATH']
 
 def parse():
     parser = argparse.ArgumentParser(
@@ -27,7 +30,8 @@ def run_nextflow_workflow(workflow_path, cleanup, nocleanup):
         return f"Error: {e.stderr}"
 
 args = parse()
-os.curdir
+img = cv2.imread(PATH+"test.png")
+print(img.size)
 workflow_path = "workflow.nf"
 output = run_nextflow_workflow(workflow_path, args.cleanup, args.nocleanup)
 
@@ -38,3 +42,16 @@ if os.path.exists(".nextflow.log"):
     os.remove(".nextflow.log")
 
 print(output)
+with open(PATH+"test.txt", "r") as file:
+    print(file.read())
+
+try:
+    files = os.listdir(PATH)
+    for file in files:
+        file_path = os.path.join(PATH, file)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+            print(file_path + " deleted successfully.")
+    print("All files deleted successfully.")
+except OSError:
+    print("Error occurred while deleting files.")

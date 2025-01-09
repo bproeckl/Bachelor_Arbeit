@@ -2,8 +2,12 @@
 
 import sys
 import json
+import cv2
+import os
 
 input = " ".join(sys.argv).lower()
+
+PATH = os.environ['WORKFLOW_PATH']
 
 alphabet = {"a":0,
             "b":0,
@@ -50,6 +54,11 @@ for key in alphabet.keys():
     alphabet[key] = input.count(key)
 
 json_object = json.dumps(alphabet, indent=4)
+
+img = cv2.imread(PATH+"test.png")
+with open(PATH+"test.txt", "w") as outfile:
+    outfile.write(str(img.shape))
+
 
 with open("sample.json", "w") as outfile:
     outfile.write(json_object)
